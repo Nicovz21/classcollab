@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var logger = require('../logger');
 
 var users = [
   'jktest', 'jktest2',
@@ -16,6 +17,13 @@ router.get('/', function(req, res, next) {
 // Init router for each user
 users.forEach(function (username) {
   require('./users/' + username)(router, username);
+});
+
+router.get('/api/add', function(req, res, next) {
+  var n1 = parseInt(req.query.n1);
+  var n2 = parseInt(re1.query.n2);
+  logger.info('/api/add Used to add ' + n1 + ' and ' + n2);
+  res.json({answer: n1 + n2});
 });
 
 module.exports = router;
